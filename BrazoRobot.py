@@ -2,7 +2,7 @@ from matplotlib.widgets import Slider, RadioButtons
 from mpl_toolkits.mplot3d import Axes3D
 import matplotlib.pyplot as plt
 import numpy as np
-
+import csv
 
 def main():
     robot = Dibujar_Robot()
@@ -11,7 +11,16 @@ def main():
 class Dibujar_Robot():
     def __init__(self):
         '''Definicion de las variables'''
-        segmentos = int(4)  # número de segmentos
+        with open('medidas.txt') as medidas:
+            csvMed = csv.reader(medidas, delimiter=',')
+            valores = np.array([], dtype=np.int32)
+            for row in csvMed:
+                valor = np.int32(row[1])
+                valores = np.append(valores, valor)
+        segmentos = int(1 + len(valores))  # número de segmentos
+        self.l = np.array([0])  # Longitud del segmento
+        for i in range(0,len(valores)):
+            self.l = np.append(self.l, valores[i])
         self.l = np.array([0, 100, 100, 80])  # Longitud del segmento
         self.w = np.array([0] * segmentos, dtype=float)  # coordinadas horizontal
         self.z = np.array([0] * segmentos, dtype=float)  # coordinadas verticales
