@@ -1,3 +1,0 @@
-brazo 1,100
-brazo 2,100
-pinza,80
