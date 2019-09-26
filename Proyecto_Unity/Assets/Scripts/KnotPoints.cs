@@ -1,23 +1,28 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using System.IO;
+using System;
 
 public class KnotPoints : MonoBehaviour {
-	Quaternion[] theta1Array = new Quaternion[5];
-	Quaternion[] theta2Array = new Quaternion[5];
-	Quaternion[] theta3Array = new Quaternion[5];
+
+    Quaternion[] theta1Array = new Quaternion[5];
+    Quaternion[] theta2Array = new Quaternion[5];
+    Quaternion[] theta3Array = new Quaternion[5];
 
 	public InputField time;
-	public GameObject[] checks = new GameObject[5];
+    public GameObject[] checks = new GameObject[5];
 	public Transform BaseRotation;
 	public Transform Link1Rotation;
 	public Transform Link2Rotation;
+    public Transform jointPos;
 
 	int knotPoints = 0;
 	bool nextPoint;
+    string formatoNombre = "_" + DateTime.Today.Year.ToString() + "_" + DateTime.Today.Month.ToString() + "_" + DateTime.Today.Day.ToString();
 
-	//hide all icons
-	void Start () 
+    //hide all icons
+    void Start () 
 	{
 		for (int i = 0; i < checks.Length; i++)
 		{
@@ -29,7 +34,7 @@ public class KnotPoints : MonoBehaviour {
 	public void SavePoint()
 	{
 		//saves position, up to a maximum of 5
-		if(knotPoints < 5)
+        if (knotPoints < 5)
 		{
 			theta1Array[knotPoints] = BaseRotation.localRotation;
 			theta2Array[knotPoints] = Link1Rotation.localRotation;
@@ -81,10 +86,28 @@ public class KnotPoints : MonoBehaviour {
 			}
 		}
 		DHParameters.setMoveSlider (false);
-
 	}
 
-	
+    public void DownloadCodeMELFA()
+    {
+        Vector3 positionAux;
+        if (checks.Length > 0)
+        {
+            string filename = "C:/Users/BP2549/Downloads/Program_Code_" + formatoNombre+".txt";
+   
+            StreamWriter sw = File.CreateText(filename);
 
+            sw.WriteLine("MELFA CODE");
+            sw.WriteLine("OVRD");
+            for (int i = 0; i < checks.Length; i++)
+            {
+                positionAux = jointPos.localPosition;
+                sw.WriteLine("MOV " + positionAux.x.ToString() + ", " + positionAux.y.ToString() + ", " + positionAux.z.ToString());
+            }
+
+            sw.Close();               
+            
+        }
+    }
 
 }
