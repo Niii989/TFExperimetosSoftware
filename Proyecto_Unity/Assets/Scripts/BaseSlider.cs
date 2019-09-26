@@ -12,7 +12,7 @@ public class BaseSlider : MonoBehaviour {
 	void Start () {
 		theta = RobotBase.rotation.y;
 		sliderTheta1.value = theta;
-	
+        sliderTheta1.onValueChanged.AddListener(SliderJoint0);
 	}
 	
 	//during an automated process, update the slider

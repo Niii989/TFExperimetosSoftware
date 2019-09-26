@@ -33,7 +33,7 @@ public class UpperArmSlider : MonoBehaviour {
 		
 		lastTheta = theta;
 		sliderTheta3.value = theta;
-		
+        sliderTheta3.onValueChanged.AddListener(SliderJoint2);
 		
 	}
 

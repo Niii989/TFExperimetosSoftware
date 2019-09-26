@@ -50,7 +50,7 @@ public class LowerArmSlider : MonoBehaviour {
 		//set slider values
 		lastTheta = theta;
 		sliderTheta2.value = theta;
-		
+        sliderTheta2.onValueChanged.AddListener(SliderJoint1);
 		
 	}
 
