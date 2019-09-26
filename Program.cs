@@ -14,9 +14,10 @@ namespace ConsoleApp1
             try
             {//Pass the filepath and filename to the StreamWriter Constructor
                 //Nombre del archivo
-                string filename = "Prueba.txt";
+                string filename = "C:\\downloads";      //Tiene que existir la ruta
+                string fullPath = Path.Combine(filename, "Prueba.txt");
 
-                StreamWriter sw = File.CreateText(filename);
+                StreamWriter sw = File.CreateText(fullPath);
                                 
                 //Write a line of text
                 sw.WriteLine("Hello World!!");
