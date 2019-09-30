@@ -18,6 +18,7 @@ public class KnotPoints : MonoBehaviour {
 	public Transform Link1Rotation;
 	public Transform Link2Rotation;
     public GameObject jointPos;
+    public Text textArea;
 
 	int knotPoints = 0;
 	bool nextPoint;
@@ -47,7 +48,10 @@ public class KnotPoints : MonoBehaviour {
 
 			knotPoints++;
 		}
-	}
+
+        textArea.text += "MOV " + jointPos.transform.position.x.ToString() +", " + jointPos.transform.position.y.ToString() + ", " + jointPos.transform.position.z.ToString() + " \n";
+
+    }
 
 	//clear all saved points
 	public void ClearPoints()
@@ -57,8 +61,11 @@ public class KnotPoints : MonoBehaviour {
 		{
 			checks[i].SetActive(false);
 		}
-						
-	}
+
+        textArea.text = " ";    
+
+
+    }
 
 	//runs when "go to saved" is pressed
 	public void GoThroughPoints()
