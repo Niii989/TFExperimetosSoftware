@@ -15,7 +15,7 @@ public class KnotPoints : MonoBehaviour {
 	public Transform BaseRotation;
 	public Transform Link1Rotation;
 	public Transform Link2Rotation;
-    public Transform jointPos;
+    public GameObject jointPos;
 
 	int knotPoints = 0;
 	bool nextPoint;
@@ -101,7 +101,7 @@ public class KnotPoints : MonoBehaviour {
             sw.WriteLine("OVRD");
             for (int i = 0; i < checks.Length; i++)
             {
-                positionAux = jointPos.localPosition;
+                positionAux = jointPos.transform.position;
                 sw.WriteLine("MOV " + positionAux.x.ToString() + ", " + positionAux.y.ToString() + ", " + positionAux.z.ToString());
             }
 
