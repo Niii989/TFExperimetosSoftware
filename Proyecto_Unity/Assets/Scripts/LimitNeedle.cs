@@ -11,8 +11,7 @@ public class LimitNeedle : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.name == "Ground")
-        {
-            Debug.Log("Hit detected");
+        {           
             savebtn.interactable = false;
         }
         
@@ -21,8 +20,7 @@ public class LimitNeedle : MonoBehaviour
     private void OnTriggerStay(Collider other)
     {
         if (other.gameObject.name == "Ground")
-        {
-            Debug.Log("Hit detected");
+        {            
             savebtn.interactable = false;
         }
 
@@ -31,8 +29,7 @@ public class LimitNeedle : MonoBehaviour
     private void OnTriggerExit(Collider other)
     {
         if (other.gameObject.name == "Ground")
-        {
-            Debug.Log("Hit detected");
+        {            
             savebtn.interactable = true;
         }
 

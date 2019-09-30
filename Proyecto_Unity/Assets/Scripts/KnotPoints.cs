@@ -9,6 +9,8 @@ public class KnotPoints : MonoBehaviour {
     Quaternion[] theta1Array = new Quaternion[5];
     Quaternion[] theta2Array = new Quaternion[5];
     Quaternion[] theta3Array = new Quaternion[5];
+    Vector3[] positionsArm = new Vector3[5];
+    
 
 	public InputField time;
     public GameObject[] checks = new GameObject[5];
@@ -39,6 +41,7 @@ public class KnotPoints : MonoBehaviour {
 			theta1Array[knotPoints] = BaseRotation.localRotation;
 			theta2Array[knotPoints] = Link1Rotation.localRotation;
 			theta3Array[knotPoints] = Link2Rotation.localRotation;
+            positionsArm[knotPoints] = jointPos.transform.position;
 
 			checks[knotPoints].SetActive(true);
 
@@ -98,10 +101,10 @@ public class KnotPoints : MonoBehaviour {
             StreamWriter sw = File.CreateText(filename);
 
             sw.WriteLine("MELFA CODE");
-            sw.WriteLine("OVRD");
-            for (int i = 0; i < checks.Length; i++)
+            sw.WriteLine("OVRD " + Convert.ToString(Decimal.Round(1/Decimal.Parse(time.text),2)));
+            for (int i = 0; i < knotPoints; i++)
             {
-                positionAux = jointPos.transform.position;
+                positionAux = positionsArm[i];
                 sw.WriteLine("MOV " + positionAux.x.ToString() + ", " + positionAux.y.ToString() + ", " + positionAux.z.ToString());
             }
 
