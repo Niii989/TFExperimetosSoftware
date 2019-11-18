@@ -8,11 +8,12 @@ using UnityEngine.UI;
 public class SpeechScript : MonoBehaviour
 {
     public Text myTemp;
+    public Button str;
 
     private KeywordRecognizer reconocerpalabras;
     private ConfidenceLevel nivel_confianza = ConfidenceLevel.Low;
-    private Dictionary<string, Accion> palabrasaccion = new Dictionary<string, Accion>();
-    private Kinematics exec;
+    private Dictionary<string, Accion> palabrasaccion = new Dictionary<string, Accion>();   
+    private KnotPoints exec;
     private EmergencyStop esc;
 
 
@@ -21,15 +22,29 @@ public class SpeechScript : MonoBehaviour
     //start is called before the first frame update
     void Start()
     {
-        exec = FindObjectOfType<Kinematics>();
+        exec = FindObjectOfType<KnotPoints>();
         esc = FindObjectOfType<EmergencyStop>();
+        Debug.Log(exec.auxiliar);
 
-        palabrasaccion.Add("start", exec.StartKinematics);
+        palabrasaccion.Add("clear", exec.ClearPoints);
+        palabrasaccion.Add("put away", exec.SavePoint);
+        palabrasaccion.Add("start", exec.GoThroughPoints);
+        palabrasaccion.Add("download", exec.DownloadCodeMELFA);
         palabrasaccion.Add("stop", esc.Stop);
 
         reconocerpalabras = new KeywordRecognizer(palabrasaccion.Keys.ToArray(), nivel_confianza);
         reconocerpalabras.OnPhraseRecognized += OnKeywordsRecognized;
         reconocerpalabras.Start();
+    }
+
+    void StartSth()
+    {
+        
+    }
+
+    void EndSth()
+    {
+
     }
 
     void OnDestroy()

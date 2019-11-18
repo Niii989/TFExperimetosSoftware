@@ -10,9 +10,9 @@ public class KnotPoints : MonoBehaviour {
     Quaternion[] theta2Array = new Quaternion[5];
     Quaternion[] theta3Array = new Quaternion[5];
     Vector3[] positionsArm = new Vector3[5];
-    
 
-	public InputField time;
+    public string auxiliar;
+    public InputField time;
     public GameObject[] checks = new GameObject[5];
 	public Transform BaseRotation;
 	public Transform Link1Rotation;
@@ -111,7 +111,7 @@ public class KnotPoints : MonoBehaviour {
 
             sw.WriteLine("MELFA CODE \n");
             sw.WriteLine(textArea.text.ToString());
-            sw.WriteLine("OVRD " + Convert.ToString(Decimal.Round(1 / Decimal.Parse(time.text), 2)) + "\n");
+            sw.WriteLine("OVRD " + Convert.ToString(Decimal.Round(50 / Decimal.Parse(time.text), 2)) + "\n");
             for (int i = 0; i < knotPoints; i++)
             {                
                 sw.WriteLine("MOV P" + (i+1).ToString());
