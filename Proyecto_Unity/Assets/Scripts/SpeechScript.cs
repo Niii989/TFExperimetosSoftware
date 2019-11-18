@@ -8,14 +8,15 @@ using UnityEngine.UI;
 public class SpeechScript : MonoBehaviour
 {
     public Text myTemp;
-    public Button str;
+    public Slider waist;
+    public Slider shoulder;
+    public Slider elbow;
 
     private KeywordRecognizer reconocerpalabras;
     private ConfidenceLevel nivel_confianza = ConfidenceLevel.Low;
     private Dictionary<string, Accion> palabrasaccion = new Dictionary<string, Accion>();   
     private KnotPoints exec;
     private EmergencyStop esc;
-
 
     private delegate void Accion();
 
@@ -30,6 +31,12 @@ public class SpeechScript : MonoBehaviour
         palabrasaccion.Add("put away", exec.SavePoint);
         palabrasaccion.Add("start", exec.GoThroughPoints);
         palabrasaccion.Add("download", exec.DownloadCodeMELFA);
+        palabrasaccion.Add("left waist", leftWaist);
+        palabrasaccion.Add("right waist", rigthWaist);
+        palabrasaccion.Add("up shoulder", upShoulder);
+        palabrasaccion.Add("down shoulder", downShoulder);
+        palabrasaccion.Add("up elbow", upElbow);
+        palabrasaccion.Add("down elbow", downElbow);
         palabrasaccion.Add("stop", esc.Stop);
 
         reconocerpalabras = new KeywordRecognizer(palabrasaccion.Keys.ToArray(), nivel_confianza);
@@ -37,14 +44,34 @@ public class SpeechScript : MonoBehaviour
         reconocerpalabras.Start();
     }
 
-    void StartSth()
+    void upShoulder()
     {
-        
+        shoulder.value += 5;
     }
 
-    void EndSth()
+    void downShoulder()
     {
+        shoulder.value -= 5;
+    }
 
+    void upElbow()
+    {
+        elbow.value += 6;
+    }
+
+    void downElbow()
+    {
+        elbow.value -= 6;
+    }
+
+    void rigthWaist()
+    {        
+        waist.value += 8;        
+    }
+
+    void leftWaist()
+    {
+        waist.value -= 8;
     }
 
     void OnDestroy()
