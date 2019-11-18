@@ -25,7 +25,6 @@ public class Kinematics : MonoBehaviour {
 			StartCoroutine(RotateBaseToTarget(float.Parse(time.text)));
 			StartCoroutine(ConfigureArm(float.Parse(time.text)));
 
-
 		}
 	}
 

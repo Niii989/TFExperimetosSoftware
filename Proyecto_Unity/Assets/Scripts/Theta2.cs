@@ -28,7 +28,5 @@ public class Theta2 : MonoBehaviour {
 		theta2Text.text = ""+theta;
 		
 	}
-	
-		
-	
+			
 }

@@ -46,11 +46,14 @@ public class KnotPoints : MonoBehaviour {
 
 			checks[knotPoints].SetActive(true);
 
-			knotPoints++;
+            //El eje z es el eje y en el eje del robot.
+            textArea.text += "DEF POS P" + (knotPoints+1).ToString() + " \n";
+            textArea.text += "P" + (knotPoints+1).ToString() + " = (" + jointPos.transform.position.x.ToString() + ", " + jointPos.transform.position.z.ToString() + ", " + jointPos.transform.position.y.ToString() + ", 180.00, 0.00, 180.00) \n";
+            //Theta 1 es el angulo y de la orientacion del vector.
+
+            knotPoints++;
 		}
-
-        textArea.text += "MOV " + jointPos.transform.position.x.ToString() +", " + jointPos.transform.position.y.ToString() + ", " + jointPos.transform.position.z.ToString() + " \n";
-
+        
     }
 
 	//clear all saved points
@@ -99,22 +102,20 @@ public class KnotPoints : MonoBehaviour {
 	}
 
     public void DownloadCodeMELFA()
-    {
-        Vector3 positionAux;
+    {        
         if (checks.Length > 0)
         {
             string filename = "C:/Users/BP2549/Downloads/Program_Code_" + formatoNombre+".txt";
    
             StreamWriter sw = File.CreateText(filename);
 
-            sw.WriteLine("MELFA CODE");
-            sw.WriteLine("OVRD " + Convert.ToString(Decimal.Round(1/Decimal.Parse(time.text),2)));
+            sw.WriteLine("MELFA CODE \n");
+            sw.WriteLine(textArea.text.ToString());
+            sw.WriteLine("OVRD " + Convert.ToString(Decimal.Round(1 / Decimal.Parse(time.text), 2)) + "\n");
             for (int i = 0; i < knotPoints; i++)
-            {
-                positionAux = positionsArm[i];
-                sw.WriteLine("MOV " + positionAux.x.ToString() + ", " + positionAux.y.ToString() + ", " + positionAux.z.ToString());
+            {                
+                sw.WriteLine("MOV P" + (i+1).ToString());
             }
-
             sw.Close();               
             
         }

@@ -28,4 +28,9 @@ public class Theta1 : MonoBehaviour {
 		DHParameters.setTheta1(x-theta);
 		theta1Text.text = ""+(x-theta);
 	}
+
+    void UpAngle()
+    {
+
+    }
 }
