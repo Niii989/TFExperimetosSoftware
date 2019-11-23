@@ -48,7 +48,17 @@ public class KnotPoints : MonoBehaviour {
 
             //El eje z es el eje y en el eje del robot.
             textArea.text += "DEF POS P" + (knotPoints+1).ToString() + " \n";
-            textArea.text += "P" + (knotPoints+1).ToString() + " = (" + jointPos.transform.position.x.ToString() + ", " + jointPos.transform.position.z.ToString() + ", " + jointPos.transform.position.y.ToString() + ", 180.00, 0.00, 180.00) \n";
+            decimal posx = (decimal)(jointPos.transform.position.y);
+            //posx -= (decimal)(0.004857569);
+            posx = posx * (decimal)30;
+            posx = decimal.Round(posx, 3);
+            decimal posy = (decimal)(jointPos.transform.position.x);
+            posy = posy * (decimal)5.5;
+            posy = decimal.Round(posy, 3);
+            decimal posz = (decimal)(jointPos.transform.position.z);
+            posz = posz * (decimal)19.9;
+            posz = decimal.Round(posz, 3);
+            textArea.text += "P" + (knotPoints+1).ToString() + " = (" + posx.ToString() + ", " + posy.ToString() + ", " + posz.ToString() + ", 180.000, 0.000, 180.000) \n";
             //Theta 1 es el angulo y de la orientacion del vector.
 
             knotPoints++;
